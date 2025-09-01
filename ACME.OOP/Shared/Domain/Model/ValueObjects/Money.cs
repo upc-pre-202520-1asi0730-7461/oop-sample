@@ -20,6 +20,8 @@ public record Money
             throw new ArgumentException("Currency must be a valid 3-letter ISO code.", nameof(currency));
         if (amount < 0)
             throw new ArgumentException("Amount must be a non-negative number.", nameof(amount));
+        Amount = amount;
+        Currency = currency.ToUpper();
     }
     
     /// <summary>
