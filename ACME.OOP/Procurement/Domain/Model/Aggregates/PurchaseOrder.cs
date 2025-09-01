@@ -34,7 +34,7 @@ public class PurchaseOrder(string orderNumber, SupplierId supplierId, DateTime o
     /// <param name="quantity">The quantity of the product being ordered. Must be greater than zero.</param>
     /// <param name="unitPriceAmount">The unit price of the product as a decimal. Must be a non-negative number.</param>
     /// <exception cref="ArgumentOutOfRangeException">Thrown if quantity is less than or equal to zero or if unit price is negative.</exception>
-    public void AddItem(ProductId productId, int quantity, decimal unitPriceAmount)
+    public PurchaseOrder AddItem(ProductId productId, int quantity, decimal unitPriceAmount)
     {
         ArgumentNullException.ThrowIfNull(productId);
         if (quantity <= 0) throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be greater than zero.");
@@ -43,6 +43,7 @@ public class PurchaseOrder(string orderNumber, SupplierId supplierId, DateTime o
         var unitPrice = new Money(unitPriceAmount, Currency);
         var item = new PurchaseOrderItem(productId, quantity, unitPrice);
         _items.Add(item);
+        return this;
     }
 
     /// <summary>
